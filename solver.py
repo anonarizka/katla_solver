@@ -7,7 +7,7 @@ def split(word):
     return [char for char in word]
 
 # validate args
-if len(sys.argv) != 4:
+if len(sys.argv) != 4 or len(sys.argv) == 2:
     print("Usage: ./wordlesolver.py <letters in word> <letters not in word> <placement>")
     print("<letters in word> is just any letters that you know are in the word, without spaces, e.g. vr")
     print("<letters not in word> is any letters that you know are NOT in the word, without spaces, e.g. qxu")
