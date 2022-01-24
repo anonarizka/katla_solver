@@ -8,7 +8,7 @@ def split(word):
 
 def manual():
     print("PEMAKAIAN: ")
-    print("./solver.py <huruf-huruf dalam katla> <huruf-huruf tidak dalam katla> <penempatan huruf>")
+    print("./pemecah.py <huruf-huruf dalam katla> <huruf-huruf tidak dalam katla> <penempatan huruf>")
     print("<huruf-huruf dalam katla> adalah huruf-huruf yang kamu ketahui ada pada katla; tuliskan tanpa spasi. contoh: ab")
     print("<huruf-huruf tidak dalam katla> adalah huruf-huruf yang kamu ketahui tidak ada pada katla; tuliskan tanpa spasi. contoh: sd")
     print("<penempatan huruf> adalah penempatan tata letak huruf-huruf yang kita ketahui saat ini dituliskan, dan yang tidak diketahui ditandai dengan underscore. contoh: aba__")
