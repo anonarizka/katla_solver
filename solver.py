@@ -6,19 +6,28 @@ import sys, string, re
 def split(word):
     return [char for char in word]
 
+def manual():
+    print("PEMAKAIAN: ")
+    print("./solver.py <huruf-huruf dalam katla> <huruf-huruf tidak dalam katla> <penempatan huruf>")
+    print("<huruf-huruf dalam katla> adalah huruf-huruf yang kamu ketahui ada pada katla; tuliskan tanpa spasi. contoh: ab")
+    print("<huruf-huruf tidak dalam katla> adalah huruf-huruf yang kamu ketahui tidak ada pada katla; tuliskan tanpa spasi. contoh: sd")
+    print("<penempatan huruf> adalah penempatan tata letak huruf-huruf yang kita ketahui saat ini dituliskan, dan yang tidak diketahui ditandai dengan underscore. contoh: aba__")
+    print("")
+    print("CATATAN: ")
+    print("jika kamu tidak memiliki informasi yang cukup untuk mengisi salah satu argumen di atas, dapat di isi argument dengan tanda tanya \"?\"")
+
+def errorout():
+    print("Terjadi ERROR: ")
+    print("Penempatan huruf harus tepat 5 karakter, dan hanya terdiri dari huruf dan underscore\n")
+
 # validate args
 if len(sys.argv) != 4 or len(sys.argv) == 2:
-    print("Usage: ./wordlesolver.py <letters in word> <letters not in word> <placement>")
-    print("<letters in word> is just any letters that you know are in the word, without spaces, e.g. vr")
-    print("<letters not in word> is any letters that you know are NOT in the word, without spaces, e.g. qxu")
-    print("<placement> should have the actual placement for any letters that went green, with any unknowns marked as an underscore, for example __v_r")
-    print("")
-    print("NOTE: if you do not have enough information to fill out one of these fields, replace that field with a single question mark \"?\"")
+    manual()
     exit()
 
 dictionary = open("words.txt", "r")
 words = dictionary.readlines()
-print("Loaded " + str(len(words)) + " words from dictionary.")
+print("Telah mengambil " + str(len(words)) + " kata dari kamus.\n")
 dictionary.close()
 
 # this will be the array with the possible answers
@@ -31,7 +40,7 @@ for word in words:
 # check sys.argv[1] and sys.argv[2]
 allowed = set(string.ascii_lowercase + '?')
 if not set(sys.argv[1] + sys.argv[2]) <= allowed:
-   print("The first and second arguments should either be lowercase letters, or a single question mark (?) as a placeholder") 
+   print("Argumen pertama dan kedua harus berupa huruf kecil, atau menggunakan tanda tanya tunggal (?) sebagai pengganti") 
 
 # remove words without the necessary chars
 if sys.argv[1] != '?':
@@ -41,19 +50,18 @@ if sys.argv[1] != '?':
 if sys.argv[2] != '?':
     solutions = [x for x in solutions if all(y not in x for y in sys.argv[2])]
 
-# do some checks to the user regex
-def errorout():
-    print("Second argument should be exactly 5 characters long, consisting of letters and underscores only")
-    exit()
-
 regex = sys.argv[3]
 if regex == '?':
     regex = "_____"
 allowed = set(string.ascii_lowercase + '_')
 if not set(regex) <= allowed:
     errorout()
+    manual()
+    exit()
 if len(regex) != 5:
     errorout()
+    manual()
+    exit()
     
 regex = regex.replace("_", ".")
 
